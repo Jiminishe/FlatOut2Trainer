@@ -32,6 +32,19 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Download ImGui
+        run: |
+          if not exist external\imgui\imgui.h (
+            mkdir external\imgui 2>nul
+            mkdir external\imgui\backends 2>nul
+            curl -L -o imgui.zip https://github.com/ocornut/imgui/archive/refs/tags/v1.91.2.zip
+            powershell -Command "Expand-Archive -Force imgui.zip"
+            move imgui-1.91.2\* external\imgui\
+            rmdir /s /q imgui-1.91.2
+            del imgui.zip
+          )
+        shell: cmd
+
       - name: Setup MSVC
         uses: microsoft/setup-msbuild@v2
 

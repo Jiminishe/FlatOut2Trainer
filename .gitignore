@@ -1,0 +1,49 @@
+# Build artifacts
+build/
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+*.exe
+*.manifest
+*.res
+*.tlog
+*.log
+*.ini
+*.cache
+
+# IDE
+.vs/
+.vscode/
+*.sln
+*.vcxproj*
+*.vcproj
+*.user
+*.suo
+*.opensdf
+*.sdf
+*.idb
+*.ipch
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+_test_output.txt
+
+# External (downloaded)
+external/imgui/
+!external/imgui/.gitkeep
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Distribution
+*.zip
+*.7z
+*.rar

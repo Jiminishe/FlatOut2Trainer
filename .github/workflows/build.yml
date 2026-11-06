@@ -25,6 +25,7 @@ jobs:
           - name: "Debug x86"
             build_type: Debug
             arch: Win32
+      fail-fast: false
 
     steps:
       - name: Checkout repository
@@ -38,11 +39,17 @@ jobs:
             mkdir external\imgui 2>nul
             mkdir external\imgui\backends 2>nul
             curl -L -o imgui.zip https://github.com/ocornut/imgui/archive/refs/tags/v1.91.2.zip
-            powershell -Command "Expand-Archive -Force imgui.zip"
-            move imgui-1.91.2\* external\imgui\
-            rmdir /s /q imgui-1.91.2
-            del imgui.zip
+            powershell -Command "Expand-Archive -Force -DestinationPath . imgui.zip"
+            move /Y imgui-1.91.2\* external\imgui\ 2>nul
+            rmdir /s /q imgui-1.91.2 2>nul
+            del imgui.zip 2>nul
           )
+          dir external\imgui
+        shell: cmd
+
+      - name: Verify ImGui
+        run: |
+          if exist external\imgui\imgui.h (echo "ImGui OK") else (echo "ImGui MISSING" && exit /b 1)
         shell: cmd
 
       - name: Setup MSVC
